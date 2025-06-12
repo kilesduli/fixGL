@@ -50,7 +50,6 @@ let
       (if makeNoVersioningSymLink then (mkLibNoVersioningSymLink libpaths) else [ ])
     else throw "found 0 libpath, build failure.";
 
-
   writeGLScript = { name, ldpath }:
     writeScriptBin name
       ''
