@@ -18,14 +18,9 @@ in
   fixGLFedora = import ./make-fixGL.nix {
     os = "Fedora";
     libpathsfile = (grabLibPathFromRPM [
-      "libglvnd"
-      "libglvnd-egl"
-      "libglvnd-gles"
-      "libglvnd-glx"
-      "libglvnd-opengl"
+      # all we need are the nvidia libraries
       "xorg-x11-drv-nvidia-cuda-libs"
       "xorg-x11-drv-nvidia-libs"
-      "libXext"
     ]);
     makeNoVersioningSymLink = true;
   };
