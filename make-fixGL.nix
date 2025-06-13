@@ -19,10 +19,9 @@ let
       name = baseNameOf libpath;
       result = match "^([^ ]+\\.so)\.?(([0-9+]).*)?$" name;
     in
-    if match == null
-    then null
-    else
-      { name = (elemAt result 0); path = libpath; majorVersion = (elemAt result 2); fullVersion = (elemAt result 1); };
+    if match != null && (elemAt result 1) != null
+    then { name = (elemAt result 0); path = libpath; majorVersion = (elemAt result 2); fullVersion = (elemAt result 1); }
+    else null;
 
   mkLibNoVersioningSymLink = libpaths:
     let

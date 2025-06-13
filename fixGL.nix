@@ -10,7 +10,7 @@ let
     pkgs.runCommand "gl-lib-path-from-fedora-rpm"
       { __noChroot = true; }
       ''
-        ${pkgs.rpm}/bin/rpm -ql ${pkgstr} | ${pkgs.pcre}/bin/pcregrep "^/usr/lib(64)?/.*\.so\.\d" > $out || touch "$out"
+        ${pkgs.rpm}/bin/rpm -ql ${pkgstr} | ${pkgs.pcre}/bin/pcregrep "^/usr/lib(64)?/.*\.so.*" > $out || touch "$out"
       '';
 
 in
