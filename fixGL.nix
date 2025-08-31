@@ -8,7 +8,13 @@ let
       pkgstr = lib.concatStringsSep " " packages;
     in
     pkgs.runCommand "gl-lib-path-from-fedora-rpm"
-      { __noChroot = true; }
+      {
+        __noChroot = true;
+        # force rebuild on each build
+        time = builtins.currentTime;
+        preferLocalBuild = true;
+        allowSubstitutes = false;
+      }
       ''
         ${pkgs.rpm}/bin/rpm -ql ${pkgstr} | ${pkgs.pcre}/bin/pcregrep "^/usr/lib(64)?/.*\.so.*" > $out || touch "$out"
       '';
